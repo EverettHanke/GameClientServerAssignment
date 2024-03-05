@@ -7,42 +7,42 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class BankAccount
 {
-    private double balance;
-    private Lock balanceChangeLock;
+    private double health;
+    private Lock playerChangeLock;
 
     /**
      Constructs a bank account with a zero balance.
      */
     public BankAccount()
     {
-        balance = 0;
-        balanceChangeLock = new ReentrantLock();
+        health = 100;
+        playerChangeLock = new ReentrantLock();
     }
 
     /**
      Constructs a bank account with a given balance.
-     @param initialBalance the initial balance
+     @param initialHealth the initial balance
      */
-    public BankAccount(double initialBalance)
+    public BankAccount(double initialHealth)
     {
-        balance = initialBalance;
+        health = initialHealth;
     }
 
     /**
      Deposits money into the bank account.
      @param amount the amount to deposit
      */
-    public void deposit(double amount)
+    public void heal(double amount)
     {
-        balanceChangeLock.lock();
+        playerChangeLock.lock();
         try
         {
-            double newBalance = balance + amount;
-            balance = newBalance;
+            double newHealth = health + amount;
+            health = newHealth;
         }
         finally
         {
-            balanceChangeLock.unlock();
+            playerChangeLock.unlock();
         }
     }
 
@@ -50,17 +50,17 @@ public class BankAccount
      Withdraws money from the bank account.
      @param amount the amount to withdraw
      */
-    public void withdraw(double amount)
+    public void hurt(double amount)
     {
-        balanceChangeLock.lock();
+        playerChangeLock.lock();
         try
         {
-            double newBalance = balance - amount;
-            balance = newBalance;
+            double newHealth = health - amount;
+            health = newHealth;
         }
         finally
         {
-            balanceChangeLock.unlock();
+            playerChangeLock.unlock();
         }
     }
 
@@ -68,8 +68,8 @@ public class BankAccount
      Gets the current balance of the bank account.
      @return the current balance
      */
-    public double getBalance()
+    public double getHealth()
     {
-        return balance;
+        return health;
     }
 }

@@ -1,8 +1,8 @@
 
-Simple Bank Access Protocol (SBAP)
+Simple Game Access Protocol (SBAP)
 Whenever you develop a server application, you need to specify some
 application-level protocol that clients can use to interact with the server.
-For the purpose of this example, we will create a "Simple Bank Access Protocol".
+For the purpose of this example, we will create a "Simple Game Access Protocol".
 The table below shows the protocol format. Of course, this is just a toy
 protocol to show you how to implement a server.
 

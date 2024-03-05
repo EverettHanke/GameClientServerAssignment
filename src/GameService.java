@@ -1,6 +1,4 @@
-import java.io.InputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
@@ -9,23 +7,23 @@ import java.util.Scanner;
  Executes Simple Bank Access Protocol commands
  from a socket.
  */
-public class BankService implements Runnable
+public class GameService implements Runnable
 {
     private Socket s;
     private Scanner in;
     private PrintWriter out;
-    private Bank bank;
+    private Game game;
 
     /**
      Constructs a service object that processes commands
      from a socket for a bank.
      @param aSocket the socket
-     @param aBank the bank
+     @param aGame the bank
      */
-    public BankService(Socket aSocket, Bank aBank)
+    public GameService(Socket aSocket, Game aGame)
     {
         s = aSocket;
-        bank = aBank;
+        game = aGame;
     }
 
     public void run()
@@ -74,12 +72,12 @@ public class BankService implements Runnable
         if (command.equals("DEPOSIT"))
         {
             double amount = in.nextDouble();
-            bank.deposit(account, amount);
+            game.heal(account, amount);
         }
         else if (command.equals("WITHDRAW"))
         {
             double amount = in.nextDouble();
-            bank.withdraw(account, amount);
+            game.hurt(account, amount);
         }
         else if (!command.equals("BALANCE"))
         {
@@ -87,7 +85,7 @@ public class BankService implements Runnable
             out.flush();
             return;
         }
-        out.println(account + " " + bank.getBalance(account));
+        out.println(account + " " + game.getHealth(account));
         out.flush();
     }
 }
