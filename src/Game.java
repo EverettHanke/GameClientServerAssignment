@@ -3,7 +3,7 @@
  */
 public class Game
 {
-    private BankAccount[] players;
+    private PlayerAccount[] players;
 
     /**
      Constructs a bank account with a given number of accounts.
@@ -11,10 +11,10 @@ public class Game
      */
     public Game(int size)
     {
-        players = new BankAccount[size];
+        players = new PlayerAccount[size];
         for (int i = 0; i < players.length; i++)
         {
-            players[i] = new BankAccount();
+            players[i] = new PlayerAccount();
         }
     }
 
@@ -25,7 +25,7 @@ public class Game
      */
     public void heal(int clientNumber, double amount)
     {
-        BankAccount account = players[clientNumber];
+        PlayerAccount account = players[clientNumber];
         account.heal(amount);
     }
 
@@ -36,7 +36,7 @@ public class Game
      */
     public void hurt(int clientNumber, double amount)
     {
-        BankAccount account = players[clientNumber];
+        PlayerAccount account = players[clientNumber];
         account.hurt(amount);
     }
 
@@ -47,7 +47,7 @@ public class Game
      */
     public double getHealth(int clientNumber)
     {
-        BankAccount account = players[clientNumber];
+        PlayerAccount account = players[clientNumber];
         return account.getHealth();
     }
 }

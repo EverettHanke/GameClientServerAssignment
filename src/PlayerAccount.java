@@ -5,7 +5,7 @@ import java.util.concurrent.locks.ReentrantLock;
  A bank account has a balance that can be changed by
  deposits and withdrawals.
  */
-public class BankAccount
+public class PlayerAccount
 {
     private double health;
     private Lock playerChangeLock;
@@ -13,7 +13,7 @@ public class BankAccount
     /**
      Constructs a bank account with a zero balance.
      */
-    public BankAccount()
+    public PlayerAccount()
     {
         health = 100;
         playerChangeLock = new ReentrantLock();
@@ -23,7 +23,7 @@ public class BankAccount
      Constructs a bank account with a given balance.
      @param initialHealth the initial balance
      */
-    public BankAccount(double initialHealth)
+    public PlayerAccount(double initialHealth)
     {
         health = initialHealth;
     }

@@ -5,7 +5,7 @@ import java.net.Socket;
 /**
  A server that executes the Simple Bank Access Protocol.
  */
-public class BankServer
+public class GameServer
 {
     public static void main(String[] args) throws IOException
     {
@@ -18,7 +18,7 @@ public class BankServer
         while (true)
         {
             Socket s = server.accept();
-            System.out.println("Client connected.");
+            System.out.println("Player connected.");
             GameService service = new GameService(s, game);
             Thread t = new Thread(service);
             t.start();
