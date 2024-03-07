@@ -8,11 +8,11 @@ import java.util.Scanner;
 /**
  This program tests the bank server.
  */
-public class BankClient
+public class PlayerClient
 {
     public static void main(String[] args) throws IOException
     {
-        final int SBAP_PORT = 8888;
+        final int SBAP_PORT = 8887;
         try (Socket s = new Socket("localhost", SBAP_PORT))
         {
             InputStream instream = s.getInputStream();
