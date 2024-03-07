@@ -20,14 +20,14 @@ public class PlayerClient
             Scanner in = new Scanner(instream);
             PrintWriter out = new PrintWriter(outstream);
 
-            String command = "DEPOSIT 3 1000";
+            String command = "HEAL 3 100";
             System.out.println("Sending: " + command);
             out.print(command + "\n");
             out.flush();
             String response = in.nextLine();
             System.out.println("Receiving: " + response);
 
-            command = "WITHDRAW 3 500";
+            command = "DAMAGE 3 500";
             System.out.println("Sending: " + command);
             out.print(command + "\n");
             out.flush();

@@ -69,23 +69,23 @@ public class GameService implements Runnable
     public void executeCommand(String command)
     {
         int account = in.nextInt();
-        if (command.equals("DEPOSIT"))
+        if (command.equals("HEAL"))
         {
             double amount = in.nextDouble();
-            game.heal(account, amount);
+            game.heal(account);
         }
-        else if (command.equals("WITHDRAW"))
+        else if (command.equals("DAMAGE"))
         {
             double amount = in.nextDouble();
-            game.hurt(account, amount);
+            game.hurt(account);
         }
-        else if (!command.equals("BALANCE"))
+        else if (!command.equals("STATUS"))
         {
             out.println("Invalid command");
             out.flush();
             return;
         }
-        out.println(account + " " + game.getHealth(account));
+        out.println(account + " " + game.reflect(account));
         out.flush();
     }
 }

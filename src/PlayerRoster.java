@@ -5,34 +5,27 @@ import java.util.concurrent.locks.ReentrantLock;
  A bank account has a balance that can be changed by
  deposits and withdrawals.
  */
-public class PlayerAccount
+public class PlayerRoster
 {
     private double health;
+    private double stamina;
     private Lock playerChangeLock;
 
     /**
-     Constructs a bank account with a zero balance.
+     Constructs a player character with 100 health and 100 stamina.
      */
-    public PlayerAccount()
+    public PlayerRoster()
     {
         health = 100;
+        stamina = 100;
         playerChangeLock = new ReentrantLock();
-    }
-
-    /**
-     Constructs a bank account with a given balance.
-     @param initialHealth the initial balance
-     */
-    public PlayerAccount(double initialHealth)
-    {
-        health = initialHealth;
     }
 
     /**
      Deposits money into the bank account.
      @param amount the amount to deposit
      */
-    public void heal(double amount)
+    public void heal(double amount) //takes in the random number we have running off the game
     {
         playerChangeLock.lock();
         try
@@ -50,7 +43,7 @@ public class PlayerAccount
      Withdraws money from the bank account.
      @param amount the amount to withdraw
      */
-    public void hurt(double amount)
+    public void damage(double amount)
     {
         playerChangeLock.lock();
         try
@@ -65,11 +58,33 @@ public class PlayerAccount
     }
 
     /**
-     Gets the current balance of the bank account.
-     @return the current balance
+     Gets the current Health of the Player.
+     @return the current Health
      */
     public double getHealth()
     {
         return health;
     }
+    /**
+     Gets the current Stamina of the Player.
+     @return the current Stamina
+     */
+    public double getStamina()
+    {
+        return stamina;
+    }
+
+    /**
+     * Traveling
+     * @param distance the players distance they wish to travel
+     * create risks the further you travel the higher a chance of getting hurt becomes
+     * for each distance remove 1 stamina
+     * if the player runs out of stamina and they get hurt for 5 times more the damage.
+     */
+    public void travel(double distance)
+    {
+
+    }
+
+
 }

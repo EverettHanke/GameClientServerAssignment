@@ -3,7 +3,7 @@
  */
 public class Game
 {
-    private PlayerAccount[] players;
+    private PlayerRoster[] players;
 
     /**
      Constructs a bank account with a given number of accounts.
@@ -11,33 +11,35 @@ public class Game
      */
     public Game(int size)
     {
-        players = new PlayerAccount[size];
+        players = new PlayerRoster[size];
         for (int i = 0; i < players.length; i++)
         {
-            players[i] = new PlayerAccount();
+            players[i] = new PlayerRoster();
         }
     }
 
     /**
      Deposits money into a bank account.
      @param clientNumber the account number
-     @param amount the amount to deposit
      */
-    public void heal(int clientNumber, double amount)
+    public void heal(int clientNumber)
     {
-        PlayerAccount account = players[clientNumber];
-        account.heal(amount);
+        PlayerRoster account = players[clientNumber];
+        double currentHealth = account.getHealth();
+        double range = 100 - currentHealth; //sets a range if health is 60 the range should be 40. ensure player doesnt overheal.
+        double healhAmount = Math.random() * range;
+        account.heal(healhAmount);
     }
 
     /**
      Withdraws money from a bank account.
      @param clientNumber the account number
-     @param amount the amount to withdraw
      */
-    public void hurt(int clientNumber, double amount)
+    public void hurt(int clientNumber)
     {
-        PlayerAccount account = players[clientNumber];
-        account.hurt(amount);
+        PlayerRoster account = players[clientNumber]; //get player thats getting hurt
+        double damage = (Math.random() * 10) + 5; //create random damage number pool.
+        account.damage(damage); //cast damage number
     }
 
     /**
@@ -45,9 +47,25 @@ public class Game
      @param clientNumber the account number
      @return the account balance
      */
-    public double getHealth(int clientNumber)
+    public String reflect(int clientNumber)
     {
-        PlayerAccount account = players[clientNumber];
+        StringBuilder sb = new StringBuilder();
+        sb.append("Current Health: ");
+        sb.append(getHealth(clientNumber) + "\n");
+        sb.append("Current Stamina: ");
+        sb.append(getStamina(clientNumber));
+        return sb.toString();
+    }
+
+
+    private double getHealth(int clientNumber)
+    {
+        PlayerRoster account = players[clientNumber];
         return account.getHealth();
+    }
+    private double getStamina(int clientNumber)
+    {
+        PlayerRoster account = players[clientNumber];
+        return account.getStamina();
     }
 }
