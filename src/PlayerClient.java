@@ -20,6 +20,21 @@ public class PlayerClient
             Scanner in = new Scanner(instream);
             PrintWriter out = new PrintWriter(outstream);
 
+
+            String command = "DAMAGE 3 100";
+            System.out.println("Sending: " + command);
+            out.print(command + "\n");
+            out.flush();
+            String response = in.nextLine() + in.nextLine();
+            System.out.println("Receiving: " + response);
+
+            command = "DAMAGE 3 12";
+            System.out.println("Sending: " + command);
+            out.print(command + "\n");
+            out.flush();
+            response = in.nextLine();
+            System.out.println("Receiving: " + response);
+            /*
             String command = "HEAL 3 100";
             System.out.println("Sending: " + command);
             out.print(command + "\n");
@@ -38,6 +53,8 @@ public class PlayerClient
             System.out.println("Sending: " + command);
             out.print(command + "\n");
             out.flush();
+            */
+
         }
     }
 }

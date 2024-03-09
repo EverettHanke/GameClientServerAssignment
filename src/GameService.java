@@ -16,9 +16,9 @@ public class GameService implements Runnable
 
     /**
      Constructs a service object that processes commands
-     from a socket for a bank.
+     from a socket for a game server
      @param aSocket the socket
-     @param aGame the bank
+     @param aGame the game
      */
     public GameService(Socket aSocket, Game aGame)
     {
@@ -53,7 +53,7 @@ public class GameService implements Runnable
      */
     public void doService() throws IOException
     {
-        while (true)
+        while (true) //get rid of soon. this will auto run the service. might not be ideal
         {
             if (!in.hasNext()) { return; }
             String command = in.next();
@@ -71,21 +71,27 @@ public class GameService implements Runnable
         int account = in.nextInt();
         if (command.equals("HEAL"))
         {
-            double amount = in.nextDouble();
             game.heal(account);
+            out.flush();
+            //out.println(game.heal);
         }
         else if (command.equals("DAMAGE"))
         {
-            double amount = in.nextDouble();
-            game.hurt(account);
+            game.damage(account);
+            out.flush();
         }
-        else if (!command.equals("STATUS"))
+        else if (command.equals("STATUS"))
+        {
+            game.reflect(account);
+            out.flush();
+        }
+        else
         {
             out.println("Invalid command");
             out.flush();
             return;
         }
-        out.println(account + " " + game.reflect(account));
+        out.println(account + " testy" + game.reflect(account));
         out.flush();
     }
 }

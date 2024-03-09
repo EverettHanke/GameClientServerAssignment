@@ -40,8 +40,8 @@ public class PlayerRoster
     }
 
     /**
-     Withdraws money from the bank account.
-     @param amount the amount to withdraw
+     Damage players Health from their health pool.
+     @param amount the health needed to remove
      */
     public void damage(double amount)
     {
@@ -50,6 +50,7 @@ public class PlayerRoster
         {
             double newHealth = health - amount;
             health = newHealth;
+            //retur;
         }
         finally
         {
@@ -83,7 +84,17 @@ public class PlayerRoster
      */
     public void travel(double distance)
     {
-
+        System.out.println("Traveling " + distance);
+        if (distance > stamina)
+        {
+            System.out.println("You are traveling with great risk");
+            //run major risk system and take possible damage
+        }
+        else
+        {
+            System.out.println("You are traveling with minor risk");
+            //run small risk system and take possible damage
+        }
     }
 
 

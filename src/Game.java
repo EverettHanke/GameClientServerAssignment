@@ -27,23 +27,23 @@ public class Game
         PlayerRoster account = players[clientNumber];
         double currentHealth = account.getHealth();
         double range = 100 - currentHealth; //sets a range if health is 60 the range should be 40. ensure player doesnt overheal.
-        double healhAmount = Math.random() * range;
-        account.heal(healhAmount);
+        double healthAmount = Math.random() * range;
+        account.heal(healthAmount);
     }
 
     /**
-     Withdraws money from a bank account.
+     Removes Health from a player character.
      @param clientNumber the account number
      */
-    public void hurt(int clientNumber)
+    public void damage(int clientNumber)
     {
-        PlayerRoster account = players[clientNumber]; //get player thats getting hurt
+        PlayerRoster account = players[clientNumber]; //get player that's getting hurt
         double damage = (Math.random() * 10) + 5; //create random damage number pool.
         account.damage(damage); //cast damage number
     }
 
     /**
-     Gets the balance of a bank account.
+     Gets the health & Stamina of a player character.
      @param clientNumber the account number
      @return the account balance
      */
