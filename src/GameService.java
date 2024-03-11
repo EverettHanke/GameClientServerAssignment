@@ -72,17 +72,19 @@ public class GameService implements Runnable
         if (command.equals("HEAL"))
         {
             game.heal(account);
+            out.println("HEALED for Random Amount: " + account);
             out.flush();
-            //out.println(game.heal);
         }
         else if (command.equals("DAMAGE"))
         {
             game.damage(account);
+            out.println("DAMAGED for Random Amount: " + account);
             out.flush();
         }
         else if (command.equals("STATUS"))
         {
-            game.reflect(account);
+            //game.reflect(account);
+            out.println(account + " test " + game.reflect(account));
             out.flush();
         }
         else
@@ -91,7 +93,7 @@ public class GameService implements Runnable
             out.flush();
             return;
         }
-        out.println(account + " testy" + game.reflect(account));
+        out.println(account + " test " + game.reflect(account));
         out.flush();
     }
 }
