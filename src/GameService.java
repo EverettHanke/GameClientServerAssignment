@@ -55,10 +55,21 @@ public class GameService implements Runnable
     {
         while (true) //get rid of soon. this will auto run the service. might not be ideal
         {
-            if (!in.hasNext()) { return; }
+            if (!in.hasNext())
+            {
+                return;
+            }
             String command = in.next();
-            if (command.equals("QUIT")) { return; }
-            else { executeCommand(command); }
+            if (command.equals("QUIT"))
+            {
+                out.println("Thanks for playing :)");
+                out.flush();
+                return;
+            }
+            else
+            {
+                executeCommand(command);
+            }
         }
     }
 
@@ -84,7 +95,7 @@ public class GameService implements Runnable
         else if (command.equals("STATUS"))
         {
             //game.reflect(account);
-            out.println(account + " test " + game.reflect(account));
+            out.println(account + " CHECKING STATUS:  " + game.reflect(account));
             out.flush();
         }
         else

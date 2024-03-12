@@ -6,8 +6,8 @@ public class Game
     private PlayerRoster[] players;
 
     /**
-     Constructs a bank account with a given number of accounts.
-     @param size the number of accounts
+     Constructs a game session with a given number of players
+     @param size the number of players
      */
     public Game(int size)
     {

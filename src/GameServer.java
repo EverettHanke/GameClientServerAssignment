@@ -11,8 +11,8 @@ public class GameServer
     {
         final int ACCOUNTS_LENGTH = 10;
         Game game = new Game(ACCOUNTS_LENGTH);
-        final int SBAP_PORT = 8887;
-        ServerSocket server = new ServerSocket(SBAP_PORT);
+        final int GAME_PORT = 8887;
+        ServerSocket server = new ServerSocket(GAME_PORT);
         System.out.println("Waiting for clients to connect...");
 
         while (true)
