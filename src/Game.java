@@ -22,25 +22,23 @@ public class Game
      Deposits money into a bank account.
      @param clientNumber the account number
      */
-    public void heal(int clientNumber)
+    public String heal(int clientNumber)
     {
         PlayerRoster account = players[clientNumber];
-        double currentHealth = account.getHealth();
-        double range = 100 - currentHealth; //sets a range if health is 60 the range should be 40. ensure player doesnt overheal.
-        double healthAmount = Math.random() * range;
-        account.heal(healthAmount);
+        return account.heal();
     }
 
     /**
      Removes Health from a player character.
      @param clientNumber the account number
      */
+    /*
     public void damage(int clientNumber)
     {
         PlayerRoster account = players[clientNumber]; //get player that's getting hurt
         double damage = (Math.random() * 10) + 5; //create random damage number pool.
         account.damage(damage); //cast damage number
-    }
+    } */
 
     /**
      Gets the health & Stamina of a player character.
@@ -67,5 +65,17 @@ public class Game
     {
         PlayerRoster account = players[clientNumber];
         return account.getStamina();
+    }
+
+    public String travel(int clientNumber, double distance)
+    {
+        PlayerRoster account = players[clientNumber];
+        return account.travel(distance);
+    }
+
+    public String score(int clientNumber)
+    {
+        PlayerRoster account = players[clientNumber];
+        return account.score();
     }
 }

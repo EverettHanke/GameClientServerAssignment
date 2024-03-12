@@ -62,6 +62,8 @@ public class GameService implements Runnable
             String command = in.next();
             if (command.equals("QUIT"))
             {
+                int account = in.nextInt();
+                game.score(account);
                 out.println("Thanks for playing :)");
                 out.flush();
                 return;
@@ -82,21 +84,27 @@ public class GameService implements Runnable
         int account = in.nextInt();
         if (command.equals("HEAL"))
         {
-            game.heal(account);
-            out.println("HEALED for Random Amount: " + account);
+            //game.heal(account);
+            out.println(game.heal(account));
             out.flush();
         }
+        /*
         else if (command.equals("DAMAGE"))
         {
             game.damage(account);
             out.println("DAMAGED for Random Amount: " + account);
             out.flush();
-        }
+        } */
         else if (command.equals("STATUS"))
         {
             //game.reflect(account);
             out.println(account + " CHECKING STATUS:  " + game.reflect(account));
             out.flush();
+        }
+        else if (command.equals("TRAVEL"))
+        {
+            game.travel(account, 30);
+            out.println(account + " traveling " + game.travel(account, in.nextInt()));
         }
         else
         {
@@ -104,7 +112,7 @@ public class GameService implements Runnable
             out.flush();
             return;
         }
-        out.println(account + " test " + game.reflect(account));
+        //out.println(account + " test " + game.reflect(account));
         out.flush();
     }
 }

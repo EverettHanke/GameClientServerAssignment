@@ -11,6 +11,8 @@ import java.util.Scanner;
  */
 public class PlayerClient
 {
+    private static int turns = 0;
+    private static int heal_amounts = 5;
     private static final int SBAP_PORT = 8887;
     public static boolean stillPlaying = true;
 
@@ -43,28 +45,34 @@ public class PlayerClient
 
     public static void roleChoices(int choice, Scanner in, PrintWriter out) {
         String command;
+        String response = "";
         switch (choice) {
             case 1:
                 System.out.println("Traveling");
+                System.out.println("test distance 30");
+                command = "TRAVEL 2 30";
+                out.println(command);
+                response = in.nextLine();
+                System.out.println("Receiving: " + response);
                 break;
             case 2:
                 System.out.println("Checking status");
-                command = "STATUS 3";
+                command = "STATUS 2";
                 out.println(command);
-                String response = in.nextLine() + " " + in.hasNextLine();
+                response = in.nextLine() + " " + in.hasNextLine();
                 System.out.println("Receiving: " + response);
 
                 //call menu screen again
                 break;
             case 3:
                 System.out.println("You take a rest and now feel refreshed");
-                command = "HEAL";
+                command = "HEAL 2";
                 out.println(command);
                 System.out.println("You are now at full health and stamina");
                 break;
             case 4:
                 System.out.println("Quitting");
-                command = "QUIT";
+                command = "QUIT 2";
                 out.println(command);
                 out.flush();
                 stillPlaying = false;

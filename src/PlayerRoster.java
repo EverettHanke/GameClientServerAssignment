@@ -9,6 +9,8 @@ public class PlayerRoster
 {
     private double health;
     private double stamina;
+    private int turns;
+    private double distance;
     private Lock playerChangeLock;
 
     /**
@@ -18,25 +20,27 @@ public class PlayerRoster
     {
         health = 100;
         stamina = 100;
+        distance = 0;
+        turns = 0;
         playerChangeLock = new ReentrantLock();
     }
 
     /**
-     Deposits money into the bank account.
-     @param amount the amount to deposit
+     Resets health and stamina back to 100 each
      */
-    public void heal(double amount) //takes in the random number we have running off the game
+    public String heal() //takes in the random number we have running off the game
     {
         playerChangeLock.lock();
         try
         {
-            double newHealth = health + amount;
-            health = newHealth;
+            health = 100;
+            stamina = 100;
         }
         finally
         {
             playerChangeLock.unlock();
         }
+        return "Health: " + health + " Stamina: " + stamina;
     }
 
     /**
@@ -50,7 +54,6 @@ public class PlayerRoster
         {
             double newHealth = health - amount;
             health = newHealth;
-            //retur;
         }
         finally
         {
@@ -82,19 +85,54 @@ public class PlayerRoster
      * for each distance remove 1 stamina
      * if the player runs out of stamina and they get hurt for 5 times more the damage.
      */
-    public void travel(double distance)
+    public String travel(double distance)
     {
         System.out.println("Traveling " + distance);
+        StringBuilder sb = new StringBuilder();
         if (distance > stamina)
         {
-            System.out.println("You are traveling with great risk");
+            sb.append("You are traveling with great risk");
             //run major risk system and take possible damage
+            if ((Math.floor(1 + (Math.random() * 10))) > 6)
+            {
+                damage(20);
+                sb.append("You took damage of 20");
+            }
+            if (health > 0)
+            {
+                this.distance = distance;
+                sb.append("You successfully traveled" + distance);
+            }
         }
         else
         {
-            System.out.println("You are traveling with minor risk");
+            sb.append("You are traveling with minor risk");
             //run small risk system and take possible damage
+            if ((Math.floor(1 + (Math.random() * 10))) == 6)
+            {
+                damage(10);
+                sb.append("You took damage of 10");
+            }
+            if (health > 0)
+            {
+                this.distance = distance;
+                sb.append("You successfully traveled " + distance);
+            }
         }
+        this.stamina = this.stamina-distance;
+        return sb.toString();
+    }
+
+
+    public String score()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("You traveled distance ");
+        sb.append(distance);
+        sb.append(" with ");
+        sb.append(turns);
+        sb.append(" amount of turns.");
+        return sb.toString();
     }
 
 
