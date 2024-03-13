@@ -97,7 +97,7 @@ public class GameService implements Runnable
         } */
         else if (command.equals("STATUS"))
         {
-            //game.reflect(account);
+            //game.reflect(account); //prithee be careful
             out.println(account + " CHECKING STATUS:  " + game.reflect(account));
             out.flush();
         }

@@ -66,7 +66,7 @@ public class PlayerClient
                 break;
             case 3:
                 System.out.println("You take a rest and now feel refreshed");
-                command = "HEAL 2";
+                command = "HEAL 2"; //fixes
                 out.println(command);
                 System.out.println("You are now at full health and stamina");
                 break;

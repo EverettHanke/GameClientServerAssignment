@@ -86,7 +86,7 @@ public class PlayerRoster
      * if the player runs out of stamina and they get hurt for 5 times more the damage.
      */
     public String travel(double distance)
-    {
+    { //sum gud stuff
         System.out.println("Traveling " + distance);
         StringBuilder sb = new StringBuilder();
         if (distance > stamina)
