@@ -74,6 +74,7 @@ public class PlayerClient
                     command = "HEAL 2"; //fixes
                     out.println(command);
                     System.out.println("You are now at full health and stamina");
+                    heal_amounts--;
                     System.out.println("You have " + heal_amounts + " heals remaining");
                 }
                 else
