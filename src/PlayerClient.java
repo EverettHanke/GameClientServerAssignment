@@ -35,11 +35,14 @@ public class PlayerClient
     }
 
     public static int displayChoices(Scanner userInput) {
+        System.out.println("************************************************************************");
         System.out.println("What would you like to do?");
         System.out.println("1. Travel (Use your stamina and risk health to travel distance in km)");
         System.out.println("2. Check your status (view your health and stamina)");
         System.out.println("3. Rest (regain health and stamina)");
         System.out.println("4. Give up (quit)");
+        System.out.println("************************************************************************");
+        System.out.println();
         return userInput.nextInt();
     }
 
@@ -59,16 +62,27 @@ public class PlayerClient
                 System.out.println("Checking status");
                 command = "STATUS 2";
                 out.println(command);
-                response = in.nextLine() + " " + in.hasNextLine();
+                response = in.nextLine() + " " + in.nextLine();
                 System.out.println("Receiving: " + response);
 
                 //call menu screen again
                 break;
             case 3:
                 System.out.println("You take a rest and now feel refreshed");
-                command = "HEAL 2"; //fixes
-                out.println(command);
-                System.out.println("You are now at full health and stamina");
+                if (heal_amounts >= 0)
+                {
+                    command = "HEAL 2"; //fixes
+                    out.println(command);
+                    System.out.println("You are now at full health and stamina");
+                    System.out.println("You have " + heal_amounts + " heals remaining");
+                }
+                else
+                {
+                    System.out.println("You no longer have any medkits supplies");
+                    System.out.println("This causes a restless night of pain and sorrow");
+                    System.out.println("By morning you must push on.");
+                }
+
                 break;
             case 4:
                 System.out.println("Quitting");
