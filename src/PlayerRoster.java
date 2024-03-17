@@ -91,34 +91,60 @@ public class PlayerRoster
     { //sum gud stuff
         System.out.println("Traveling " + distance);
         StringBuilder sb = new StringBuilder();
-        if (distance > stamina)
+        if (distance > stamina *2)
         {
-            sb.append("You are traveling with great risk");
+            sb.append("You are traveling with extreme danger ");
+            if ((Math.floor(1 + (Math.random()*10))) > 2)
+            {
+                damage(50);
+                sb.append( " You took damage of 50");
+            }
+            if (health > 0)
+            {
+                this.distance = distance;
+                sb.append(" You successfully traveled: " + distance);
+            }
+            else
+            {
+                sb.append(" YOU DIED");
+            }
+        }
+        else if (distance > stamina && distance < stamina*2)
+        {
+            sb.append("You are traveling with great risk: ");
             //run major risk system and take possible damage
             if ((Math.floor(1 + (Math.random() * 10))) > 6)
             {
                 damage(20);
-                sb.append("You took damage of 20");
+                sb.append(" You took damage of 20");
             }
             if (health > 0)
             {
                 this.distance = distance;
-                sb.append("You successfully traveled" + distance);
+                sb.append(" You successfully traveled" + distance);
+            }
+            else
+            {
+                sb.append(" YOU DIED");
             }
         }
         else
         {
-            sb.append("You are traveling with minor risk");
+            sb.append(" You are traveling with minor risk");
             //run small risk system and take possible damage
             if ((Math.floor(1 + (Math.random() * 10))) == 6)
             {
                 damage(10);
-                sb.append("You took damage of 10");
+                sb.append(" You took damage of 10");
             }
             if (health > 0)
             {
                 this.distance = distance;
-                sb.append("You successfully traveled " + distance);
+                sb.append(" You successfully traveled " + distance);
+            }
+            else
+            {
+                sb.append(" YOU DIED");
             }
         }
         this.stamina = this.stamina-distance;

@@ -115,7 +115,6 @@ public class GameService implements Runnable
             out.flush();
             return;
         }
-        //out.println(account + " test " + game.reflect(account));
         out.flush();
     }
 }

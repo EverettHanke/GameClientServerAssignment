@@ -36,6 +36,12 @@ public class PlayerClient
         }
     }
 
+    /**
+     * Display choices for player
+     * takes in user input between options 1-4
+     * @param userInput
+     * @return
+     */
     public static int displayChoices(Scanner userInput) {
         System.out.println("************************************************************************");
         System.out.println("What would you like to do?");
@@ -48,13 +54,21 @@ public class PlayerClient
         return userInput.nextInt();
     }
 
+    /**
+     * Gathers players choice from options 1-4 and reacts accordingly
+     * options are to travel, check status, heal/rest, and quit.
+     * @param choice
+     * @param in
+     * @param out
+     * @param userInput
+     */
     public static void roleChoices(int choice, Scanner in, PrintWriter out, Scanner userInput) {
         String command;
         String response = "";
         switch (choice) {
             case 1:
                 System.out.println("Traveling");
-                System.out.println("test distance 30");
+                //System.out.println("test distance 30");
 
                 //Now lets give the player choice of distance
                 System.out.println("Enter in how far you wish to travel");
@@ -65,6 +79,20 @@ public class PlayerClient
                 out.flush();
                 response = in.nextLine();
                 System.out.println("Receiving: " + response);
+                if (response.contains("DIED"))
+                {
+                    command = "QUIT 2";
+                    out.println(command);
+                    out.flush();
+                    stillPlaying = false;
+                    System.out.println("YOUR SCORE WAS");
+                    System.out.println("Distance: " + distance);
+                    System.out.println("Heals Remaining: " + heal_amounts);
+                    System.out.println("Turns used: " + turns);
+                    int total = distance + heal_amounts - turns;
+                    System.out.println("Total Score IS: " + total);
+                    break;
+                }
                 distance += travelDistance;
                 turns++;
                 break;
@@ -75,6 +103,7 @@ public class PlayerClient
                 out.flush();
                 response = in.nextLine();
                 System.out.println("Receiving: " + response);
+
                 turns++;
                 break;
                 /*
