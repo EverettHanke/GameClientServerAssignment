@@ -71,20 +71,23 @@ public class PlayerClient
             case 2:
                 System.out.println("Checking status");
                 command = "STATUS 2";
-                out.println(command +"\n");
+                out.println(command );
                 out.flush();
                 response = in.nextLine() + " " + in.nextLine();
                 System.out.println("Receiving: " + response);
                 turns++;
-                //call menu screen again
                 break;
             case 3:
                 System.out.println("You take a rest and now feel refreshed");
                 if (heal_amounts >= 0)
                 {
+                    System.out.println("Checking health and Stamina Status: ");
                     command = "HEAL 2";
                     out.println(command);
                     out.flush();
+                    //response = in.nextLine() + in.nextLine();
+
+                    //System.out.println(response);
                     System.out.println("You are now at full health and stamina");
                     heal_amounts--;
                     System.out.println("You have " + heal_amounts + " heals remaining");
@@ -95,8 +98,7 @@ public class PlayerClient
                     System.out.println("This causes a restless night of pain and sorrow");
                     System.out.println("By morning you must push on.");
                 }
-                response = in.nextLine() + in.nextLine();
-                System.out.println(response);
+
                 turns++;
                 break;
             case 4:
@@ -115,7 +117,7 @@ public class PlayerClient
 
                 break;
             default:
-                System.out.println("Please enter a choice between 1 and 3");
+                System.out.println("Please enter a choice between 1 and 4");
         }
     }
 

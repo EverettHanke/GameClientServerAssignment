@@ -84,9 +84,9 @@ public class GameService implements Runnable
         int account = in.nextInt();
         if (command.equals("HEAL"))
         {
-            //game.heal(account);
-            out.println(game.heal(account));
+            game.heal(account);
             out.flush();
+
         }
         /*
         else if (command.equals("DAMAGE"))
@@ -97,9 +97,10 @@ public class GameService implements Runnable
         } */
         else if (command.equals("STATUS"))
         {
-            //game.reflect(account); //prithee be careful
+
             out.println(account + " CHECKING STATUS:  " + game.reflect(account));
             out.flush();
+
         }
         else if (command.equals("TRAVEL"))
         {
