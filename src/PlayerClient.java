@@ -71,12 +71,21 @@ public class PlayerClient
             case 2:
                 System.out.println("Checking status");
                 command = "STATUS 2";
+                out.println(command);
+                out.flush();
+                response = in.nextLine();
+                System.out.println("Receiving: " + response);
+                turns++;
+                break;
+                /*
+                System.out.println("Checking status");
+                command = "STATUS 2";
                 out.println(command );
                 out.flush();
                 response = in.nextLine() + " " + in.nextLine();
                 System.out.println("Receiving: " + response);
                 turns++;
-                break;
+                break; */
             case 3:
                 System.out.println("You take a rest and now feel refreshed");
                 if (heal_amounts >= 0)

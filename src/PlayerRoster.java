@@ -11,17 +11,19 @@ public class PlayerRoster
     private double stamina;
     private int turns;
     private double distance;
+    private int accountNum;
     private Lock playerChangeLock;
 
     /**
      Constructs a player character with 100 health and 100 stamina.
      */
-    public PlayerRoster()
+    public PlayerRoster(int accountNum)
     {
         health = 100;
         stamina = 100;
         distance = 0;
         turns = 0;
+        this.accountNum = accountNum;
         playerChangeLock = new ReentrantLock();
     }
 

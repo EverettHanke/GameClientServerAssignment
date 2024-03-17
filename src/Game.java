@@ -14,7 +14,7 @@ public class Game
         players = new PlayerRoster[size];
         for (int i = 0; i < players.length; i++)
         {
-            players[i] = new PlayerRoster();
+            players[i] = new PlayerRoster(i);
         }
     }
 
