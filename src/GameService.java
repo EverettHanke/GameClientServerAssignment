@@ -63,7 +63,7 @@ public class GameService implements Runnable
             if (command.equals("QUIT"))
             {
                 int account = in.nextInt();
-                game.score(account);
+                out.println(game.score(account));
                 out.println("Thanks for playing :)");
                 out.flush();
                 return;
@@ -103,8 +103,10 @@ public class GameService implements Runnable
         }
         else if (command.equals("TRAVEL"))
         {
-            game.travel(account, 30);
-            out.println(account + " traveling " + game.travel(account, in.nextInt()));
+            int distance = in.nextInt();
+            game.travel(account, distance);
+            out.println(account + " traveling " + game.travel(account, distance));
+            out.flush();
         }
         else
         {

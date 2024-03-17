@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class PlayerClient
 {
     private static int turns = 0;
+    private static int distance = 0;
     private static int heal_amounts = 5;
     private static final int SBAP_PORT = 8887;
     public static boolean stillPlaying = true;
@@ -22,12 +23,13 @@ public class PlayerClient
              OutputStream outputStream = socket.getOutputStream();
              Scanner in = new Scanner(inputStream);
              PrintWriter out = new PrintWriter(outputStream, true);
-             Scanner userInput = new Scanner(System.in)) {
+             Scanner userInput = new Scanner(System.in))
+        {
 
             while (stillPlaying)
             {
                 int choice = displayChoices(userInput);
-                roleChoices(choice, in, out);
+                roleChoices(choice, in, out, userInput);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,33 +48,43 @@ public class PlayerClient
         return userInput.nextInt();
     }
 
-    public static void roleChoices(int choice, Scanner in, PrintWriter out) {
+    public static void roleChoices(int choice, Scanner in, PrintWriter out, Scanner userInput) {
         String command;
         String response = "";
         switch (choice) {
             case 1:
                 System.out.println("Traveling");
                 System.out.println("test distance 30");
-                command = "TRAVEL 2 30";
-                out.println(command);
+
+                //Now lets give the player choice of distance
+                System.out.println("Enter in how far you wish to travel");
+                int travelDistance = userInput.nextInt();
+
+                command = "TRAVEL 2 " + travelDistance;
+                out.println(command + "\n");
+                out.flush();
                 response = in.nextLine();
                 System.out.println("Receiving: " + response);
+                distance += travelDistance;
+                turns++;
                 break;
             case 2:
                 System.out.println("Checking status");
                 command = "STATUS 2";
-                out.println(command);
+                out.println(command +"\n");
+                out.flush();
                 response = in.nextLine() + " " + in.nextLine();
                 System.out.println("Receiving: " + response);
-
+                turns++;
                 //call menu screen again
                 break;
             case 3:
                 System.out.println("You take a rest and now feel refreshed");
                 if (heal_amounts >= 0)
                 {
-                    command = "HEAL 2"; //fixes
+                    command = "HEAL 2";
                     out.println(command);
+                    out.flush();
                     System.out.println("You are now at full health and stamina");
                     heal_amounts--;
                     System.out.println("You have " + heal_amounts + " heals remaining");
@@ -83,21 +95,42 @@ public class PlayerClient
                     System.out.println("This causes a restless night of pain and sorrow");
                     System.out.println("By morning you must push on.");
                 }
-
+                response = in.nextLine() + in.nextLine();
+                System.out.println(response);
+                turns++;
                 break;
             case 4:
                 System.out.println("Quitting");
                 command = "QUIT 2";
                 out.println(command);
                 out.flush();
+
                 stillPlaying = false;
+                System.out.println("YOUR SCORE WAS");
+                System.out.println("Distance: " + distance);
+                System.out.println("Heals Remaining: " + heal_amounts);
+                System.out.println("Turns used: " + turns);
+                int total = distance + heal_amounts - turns;
+                System.out.println("Total Score IS: " + total);
+
                 break;
             default:
                 System.out.println("Please enter a choice between 1 and 3");
         }
     }
 
-
+    /*
+    public static String getResponse(Scanner in, PrintWriter out)
+    {
+        out.flush();
+        String response = "";
+        while (in.hasNextLine())
+        {
+            response += in.nextLine();
+        }
+        return response;
+    }
+*/
 /*
 
     public static void main(String[] args) throws IOException

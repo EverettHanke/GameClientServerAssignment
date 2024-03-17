@@ -46,10 +46,10 @@ public class Game
      @return the account balance
      */
     public String reflect(int clientNumber)
-    { //togethaaa
+    {
         StringBuilder sb = new StringBuilder();
         sb.append("Current Health: ");
-        sb.append(getHealth(clientNumber) + "\n");
+        sb.append(getHealth(clientNumber) + " ");
         sb.append("Current Stamina: ");
         sb.append(getStamina(clientNumber));
         return sb.toString();
