@@ -3,7 +3,7 @@ Author: Everett Hanke
 Client Request	Server Response	Description
 Reflect n
 Ex:
-BALANCE 8 (requests health and stamina for player account number 8)	n and the balance
+Reflect 8 (requests health and stamina for player client account number 8)	returns health and stamina
 Ex:
 8 100 44
 (response that player 8 has 100hp and 44 stamina)	Get the Player n health and current stamina allowing the players to make an educated guess on whether to heal or keep pushing forward.
@@ -13,8 +13,6 @@ D for distance explored.	Travel the player a select distance of the players choo
 Heal n	n for player character. Creates random health pool to heal from.	Heal for random amount a into player n. also increases stamina.
 Hurt n	n for player character targeted. Creates random damage number remove from health pool.	Creates a random damage amount the player has no control over. The damage amount reduces the health a from player n
 QUIT	None	Quit the connection
-
-Code for the client and server is under Week 6: BankClientServerExample.zip
 
 For part 1 of this project, you will first design and submit a protocol of your choosing.
 And then you also want to choose a data structure for the server as well… and include that in your protocol design document.
