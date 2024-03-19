@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"<Unnamed>","l":"Game"},{"p":"<Unnamed>","l":"GameServer"},{"p":"<Unnamed>","l":"GameService"},{"p":"<Unnamed>","l":"Main"},{"p":"<Unnamed>","l":"PlayerClient"},{"p":"<Unnamed>","l":"PlayerRoster"}];updateSearchResults();
