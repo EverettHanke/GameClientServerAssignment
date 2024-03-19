@@ -3,7 +3,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- A server that executes the Simple Bank Access Protocol.
+ A server that Hosts a travel game for all players to join
  */
 public class GameServer
 {

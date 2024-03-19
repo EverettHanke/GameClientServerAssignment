@@ -7,25 +7,38 @@ import java.sql.SQLOutput;
 import java.util.Scanner;
 
 /**
- This program tests the bank server.
+ This program is the player client to server
+ the game plays from here
  */
 public class PlayerClient
 {
     private static int turns = 0;
     private static int distance = 0;
     private static int heal_amounts = 5;
-    private static final int SBAP_PORT = 8887;
+    private static final int GAME_PORT = 8887;
     public static boolean stillPlaying = true;
 
     public static void main(String[] args) {
-        try (Socket socket = new Socket("localhost", SBAP_PORT);
+        try (Socket socket = new Socket("localhost", GAME_PORT);
              InputStream inputStream = socket.getInputStream();
              OutputStream outputStream = socket.getOutputStream();
              Scanner in = new Scanner(inputStream);
              PrintWriter out = new PrintWriter(outputStream, true);
              Scanner userInput = new Scanner(System.in))
         {
-
+            System.out.println("WELCOME TO THE TRAVEL GAME");
+            System.out.println("--------------------------------");
+            System.out.println("The goal of this game is to see how");
+            System.out.println("you can travel without dying");
+            System.out.println("you have 5 chances to heal and rest");
+            System.out.println("once you have depleted all health kits");
+            System.out.println("you will no longer be able to rest");
+            System.out.println("traveling distances under your current stamina");
+            System.out.println("is the safest way of travel");
+            System.out.println("traveling distances greater than your current");
+            System.out.println("stamina are risky and have higher chances of death");
+            System.out.println("Good luck");
+            System.out.println("           & Safe travels");
             while (stillPlaying)
             {
                 int choice = displayChoices(userInput);
@@ -40,7 +53,7 @@ public class PlayerClient
      * Display choices for player
      * takes in user input between options 1-4
      * @param userInput
-     * @return
+     * @return userInput choice made
      */
     public static int displayChoices(Scanner userInput) {
         System.out.println("************************************************************************");
@@ -68,9 +81,7 @@ public class PlayerClient
         switch (choice) {
             case 1:
                 System.out.println("Traveling");
-                //System.out.println("test distance 30");
 
-                //Now lets give the player choice of distance
                 System.out.println("Enter in how far you wish to travel");
                 int travelDistance = userInput.nextInt();
 
@@ -106,15 +117,6 @@ public class PlayerClient
 
                 turns++;
                 break;
-                /*
-                System.out.println("Checking status");
-                command = "STATUS 2";
-                out.println(command );
-                out.flush();
-                response = in.nextLine() + " " + in.nextLine();
-                System.out.println("Receiving: " + response);
-                turns++;
-                break; */
             case 3:
                 System.out.println("You take a rest and now feel refreshed");
                 if (heal_amounts >= 0)
@@ -123,9 +125,6 @@ public class PlayerClient
                     command = "HEAL 2";
                     out.println(command);
                     out.flush();
-                    //response = in.nextLine() + in.nextLine();
-
-                    //System.out.println(response);
                     System.out.println("You are now at full health and stamina");
                     heal_amounts--;
                     System.out.println("You have " + heal_amounts + " heals remaining");
@@ -158,131 +157,4 @@ public class PlayerClient
                 System.out.println("Please enter a choice between 1 and 4");
         }
     }
-
-    /*
-    public static String getResponse(Scanner in, PrintWriter out)
-    {
-        out.flush();
-        String response = "";
-        while (in.hasNextLine())
-        {
-            response += in.nextLine();
-        }
-        return response;
-    }
-*/
-/*
-
-    public static void main(String[] args) throws IOException
-    {
-        final int GAME_PORT = 8887;
-        try (Socket s = new Socket("localhost", GAME_PORT))
-        {
-            InputStream instream = s.getInputStream();
-            OutputStream outstream = s.getOutputStream();
-            Scanner in = new Scanner(instream);
-            PrintWriter out = new PrintWriter(outstream);
-            Scanner userInput = new Scanner(System.in);
-
-            int choice;
-            choice = displayChoices(userInput);
-
-            RoleChoices(choice, in, out);
-
-
-            String command = "DAMAGE 3 100";
-            System.out.println("Sending: " + command);
-            out.print(command + "\n");
-            out.flush();
-            //String response = in.nextLine() + in.nextLine();
-            //System.out.println("Receiving: " + response);
-
-            command = "DAMAGE 3 12";
-            System.out.println("Sending: " + command);
-            out.print(command + "\n");
-            out.flush();
-            //response = in.nextLine();
-            //System.out.println("Receiving: " + response);
-
-            command = "STATUS 3";
-            System.out.println("Sending: " + command);
-            out.print(command + "\n");
-            out.flush();
-
-
-            String response = in.nextLine();
-            while (in.hasNextLine())
-            {
-                response += in.nextLine();
-            }
-            System.out.println("Receiving: " + response);
-            //********************************************************
-            /*
-            String command = "HEAL 3 100";
-            System.out.println("Sending: " + command);
-            out.print(command + "\n");
-            out.flush();
-            String response = in.nextLine();
-            System.out.println("Receiving: " + response);
-
-            command = "DAMAGE 3 500";
-            System.out.println("Sending: " + command);
-            out.print(command + "\n");
-            out.flush();
-            response = in.nextLine();
-            System.out.println("Receiving: " + response);
-
-            command = "QUIT";
-            System.out.println("Sending: " + command);
-            out.print(command + "\n");
-            out.flush();
-
-
-        }
-
-    }
-    public static int displayChoices(Scanner userInput)
-    {
-        System.out.println("What would ya like to do?");
-        System.out.println("1. Travel");
-        System.out.println("2. Check your status");
-        System.out.println("3. Give up");
-        int choice = userInput.nextInt();
-        return choice;
-    }
-
-    public static void RoleChoices(int choice, Scanner in, PrintWriter out)
-    {
-        String command = "";
-        String response = "";
-        switch (choice)
-        {
-            case 1:
-                System.out.println("traveling");
-                break;
-            case 2:
-                System.out.println("checking");
-                command = "STATUS 3";
-                response = "";
-                while (in.hasNextLine())
-                {
-                    response = in.nextLine();
-                }
-                out.print("Sending: " + command);
-                out.flush();
-                System.out.println(response);
-                break;
-            case 3:
-                System.out.println("quitting");
-                command = "QUIT";
-                System.out.println("Sending: " + command);
-                out.print(command + "\n");
-                out.flush();
-                break;
-            default:
-                System.out.println("Please enter a choice between 1 and 3");
-        }
-    }
-
- */
 }

@@ -2,8 +2,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- A bank account has a balance that can be changed by
- deposits and withdrawals.
+ A player account roster
  */
 public class PlayerRoster
 {
@@ -151,7 +150,9 @@ public class PlayerRoster
         return sb.toString();
     }
 
-
+/*
+DEPRECATED CODE BELOW
+One day I will reinstate this code so that scores are unique to players
     public String score()
     {
         StringBuilder sb = new StringBuilder();
@@ -162,6 +163,8 @@ public class PlayerRoster
         sb.append(" amount of turns.");
         return sb.toString();
     }
+ */
+
 
 
 }

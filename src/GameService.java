@@ -4,8 +4,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 /**
- Executes Simple Bank Access Protocol commands
- from a socket.
+ Runs a Game program and handles the players choices based on respective clients
  */
 public class GameService implements Runnable
 {
@@ -63,7 +62,7 @@ public class GameService implements Runnable
             if (command.equals("QUIT"))
             {
                 int account = in.nextInt();
-                out.println(game.score(account));
+                //out.println(game.score(account)); would run deprecated code for score printing
                 out.println("Thanks for playing :)");
                 out.flush();
                 return;
